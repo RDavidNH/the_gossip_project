@@ -1,0 +1,5 @@
+<h2><%= @potin.title %></h2>
+<p><%= @potin.content %></p>
+
+<h4>Auteur - <%= link_to "#{@potin.user.first_name} #{@potin.user.last_name}", show_user_path(@potin.user.id) %></h4>
+<p><%= @potin.user.description %></p>
