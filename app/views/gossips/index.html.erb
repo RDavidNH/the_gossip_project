@@ -1,7 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-9">
-      <h1>BIENVENUE SUR THE GOSSIP PROJECT!</h1>
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+      <h1>Nos Gossipsss!</h1>
+      <%= link_to 'Créer un gossip', new_gossip_path %>
       <table class="table table-sm">
         <thead>
           <tr>
@@ -10,10 +14,10 @@
           </tr>
         </thead>
         <tbody>
-          <% @potins.each do |p| %>
+          <% @gossips.each do |g| %>
           <tr>
-            <td><%= link_to p.title, gossip_path(p.id) %></td>
-            <td><%= p.user.first_name %></td>
+            <td><%= link_to g.title, gossip_path(g.id) %></td>
+            <td><%= g.user.first_name %></td>
           </tr>
           <% end %>
         </tbody>
