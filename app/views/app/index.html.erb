@@ -1,10 +1,23 @@
-<h1>BIENVENUE SUR THE GOSSIP PROJECT!</h1>
-
-<ul>
-  <% @potins.each do |p| %>
-  <li> 
-    <%= link_to p.title, show_path(p.id) %> 
-    par <%= p.user.first_name %>
-  </li>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9">
+      <h1>BIENVENUE SUR THE GOSSIP PROJECT!</h1>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Les potins</th>
+            <th>Les auteurs</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @potins.each do |p| %>
+          <tr>
+            <td><%= link_to p.title, show_path(p.id) %></td>
+            <td><%= p.user.first_name %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
