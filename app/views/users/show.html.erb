@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9">
+    
+    <h2>Profil de <%= @user.first_name %> <%= @user.last_name %></h2>
+    
+    <table class="table table-sm">
+      <% @user.attributes.each do |i| %>
+      <tr>
+          <th><%= i[0] %></th>
+          <td><%= i[1] %></td>
+      </tr>
+      <% end %>
+      </table>
+    
+    
+    </div>
+  </div>
+</div>
+
+
+

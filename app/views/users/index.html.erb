@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+      <h1>Nos utilisateurs!</h1>
+      <%= link_to 'Créer un utilisateur', new_user_path %>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Ville</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |u| %>
+          <tr>
+            <td><%= link_to u.first_name, user_path(u.id) %></td>
+            <td><%= link_to u.last_name, user_path(u.id) %></td>
+            <td><%= u.description %></td>
+            <td><%= u.email %></td>
+            <td><%= u.age %></td>
+            <td><%= u.city.name %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
