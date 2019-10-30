@@ -17,7 +17,7 @@
           <% @gossips.each do |g| %>
           <tr>
             <td><%= link_to g.title, gossip_path(g.id) %></td>
-            <td><%= g.user.first_name %></td>
+            <td><%= link_to g.user.first_name, user_path(g.user.id) %></td>
           </tr>
           <% end %>
         </tbody>
