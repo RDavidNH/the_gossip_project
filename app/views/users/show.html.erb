@@ -5,13 +5,31 @@
     <h2>Profil de <%= @user.first_name %> <%= @user.last_name %></h2>
     
     <table class="table table-sm">
-      <% @user.attributes.each do |i| %>
-      <tr>
-          <th><%= i[0] %></th>
-          <td><%= i[1] %></td>
+       <tr>
+          <th>Prénom</th>
+          <td><%= @user.first_name %></td>
       </tr>
-      <% end %>
-      </table>
+      <tr>
+          <th>Nom</th>
+          <td><%= @user.last_name %></td>
+      </tr>
+      <tr>
+          <th>Description</th>
+          <td><%= @user.description %></td>
+      </tr>
+      <tr>
+          <th>Email</th>
+          <td><%= @user.email %></td>
+      </tr>
+      <tr>
+          <th>Age</th>
+          <td><%= @user.age %></td>
+      </tr>
+      <tr>
+          <th>Ville</th>
+          <td><%= @user.city.name %></td>
+      </tr>
+    </table>
     
     
     </div>
