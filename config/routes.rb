@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'app#index'
   resources :gossips
   resources :users
+  resources :cities
   
   #get '/gossip/:id', to: 'app#show', as: 'show'
   #get '/user/:id', to: 'app#show_user', as: 'show_user'

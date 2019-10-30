@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+      <h1>Les villes!</h1>
+      <%= link_to 'Créer une ville', new_city_path %>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Code postale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cities.each do |c| %>
+          <tr>
+            <td><%= link_to c.name, city_path(c.id) %></td>
+            <td><%= c.zip_code %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
