@@ -11,6 +11,7 @@
           <tr>
             <th>Les potins</th>
             <th>Les auteurs</th>
+            <th>-</th>  
           </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
           <tr>
             <td><%= link_to g.title, gossip_path(g.id) %></td>
             <td><%= link_to g.user.first_name, user_path(g.user.id) %></td>
+            <td><%= link_to 'Modifier', edit_gossip_path(g.id) %></td>
           </tr>
           <% end %>
         </tbody>

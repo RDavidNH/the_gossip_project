@@ -14,22 +14,16 @@ class GossipsController < ApplicationController
   end
 
   def create
-    puts "*" * 60
-    p params
-    p @new_gossip
-    puts "*" * 60
     
     u = User.all
     
     @new_gossip = Gossip.new(title: params[:gossip_title], content: params[:gossip_content], user: u[rand(0..u.size)])
-    
     
     if @new_gossip.save
       redirect_to gossips_path, :flash => { :success => "Votre Gossip a été créé" }
     else
       render 'new'
     end
-    
     
     # Méthode qui créé un potin à partir du contenu du formulaire de new.html.erb, soumis par l'utilisateur
     # pour info, le contenu de ce formulaire sera accessible dans le hash params (ton meilleur pote)
@@ -38,12 +32,19 @@ class GossipsController < ApplicationController
 
   def edit
     # Méthode qui récupère le potin concerné et l'envoie à la view edit (edit.html.erb) pour affichage dans un formulaire d'édition
+    @edit_gossip = Gossip.find(params[:id])
   end
 
+  # Méthode qui met à jour le potin à partir du contenu du formulaire de edit.html.erb, soumis par l'utilisateur
+  # pour info, le contenu de ce formulaire sera accessible dans le hash params
+  # Une fois la modification faite, on redirige généralement vers la méthode show (pour afficher le potin modifié)
   def update
-    # Méthode qui met à jour le potin à partir du contenu du formulaire de edit.html.erb, soumis par l'utilisateur
-    # pour info, le contenu de ce formulaire sera accessible dans le hash params
-    # Une fois la modification faite, on redirige généralement vers la méthode show (pour afficher le potin modifié)
+    @edit_gossip = Gossip.find(params[:id])
+    if @edit_gossip.update(title: params[:gossip_title], content: params[:gossip_content])
+      redirect_to @edit_gossip, :flash => { :success => "Votre Gossip a été modifié" }
+    else
+      render :edit
+    end
   end
 
   def destroy
