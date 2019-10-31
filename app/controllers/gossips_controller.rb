@@ -47,9 +47,14 @@ class GossipsController < ApplicationController
     end
   end
 
+  # Méthode qui récupère le potin concerné et le détruit en base
+  # Une fois la suppression faite, on redirige généralement vers la méthode index (pour afficher la liste à jour)
   def destroy
-    # Méthode qui récupère le potin concerné et le détruit en base
-    # Une fois la suppression faite, on redirige généralement vers la méthode index (pour afficher la liste à jour)
+    @destroy_gossip = Gossip.find(params[:id])
+    
+    if @destroy_gossip.destroy()
+      redirect_to gossips_path, :flash => { :success => "Le Gossip a été supprimé" }
+    end
   end
 
 

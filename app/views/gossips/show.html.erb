@@ -1,12 +1,19 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-9">
+    <div class="col-sm-12">
     
     <% flash.each do |key, value| %>
       <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
 
-    <h2 class="text-capitalize"> <%= @gossip.title %> </h2>
+    <h2 class="text-capitalize"> 
+      <%= @gossip.title %> 
+      <span style="font-size: 0.5em"> 
+        <%= form_tag url_for(action: 'destroy'), method: "delete" do %>
+          <%= submit_tag "Supprimer", :class => 'btn btn-danger btn-sm' %>
+        <% end %>
+      </span>
+    </h2>
     <p><%= @gossip.content %></p>
 
     <h4>
