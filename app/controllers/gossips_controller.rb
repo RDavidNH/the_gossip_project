@@ -1,5 +1,8 @@
 class GossipsController < ApplicationController
 
+  before_action :authenticate_user, only: [:index, :new, :create, :edit, :update]
+  before_action :is_owner, only: [:edit, :update, :destroy]
+  
   def index
     @gossips = Gossip.all
   end
@@ -15,9 +18,9 @@ class GossipsController < ApplicationController
 
   def create
     
-    u = User.all
+    #user = User.find_by(id: session[:user_id])
     
-    @new_gossip = Gossip.new(title: params[:gossip_title], content: params[:gossip_content], user: u[rand(0..u.size)])
+    @new_gossip = Gossip.new(title: params[:gossip_title], content: params[:gossip_content], user: current_user)
     
     if @new_gossip.save
       redirect_to gossips_path, :flash => { :success => "Votre Gossip a été créé" }
@@ -30,8 +33,8 @@ class GossipsController < ApplicationController
     # Une fois la création faite, on redirige généralement vers la méthode show (pour afficher le potin créé)
   end
 
+  # Méthode qui récupère le potin concerné et l'envoie à la view edit (edit.html.erb) pour affichage dans un formulaire d'édition
   def edit
-    # Méthode qui récupère le potin concerné et l'envoie à la view edit (edit.html.erb) pour affichage dans un formulaire d'édition
     @edit_gossip = Gossip.find(params[:id])
   end
 
@@ -55,6 +58,25 @@ class GossipsController < ApplicationController
     if @destroy_gossip.destroy()
       redirect_to gossips_path, :flash => { :success => "Le Gossip a été supprimé" }
     end
+  end
+  
+  private
+
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+  
+  def is_owner
+    gossip = Gossip.find(params[:id])
+    
+    unless current_user == gossip.user
+      flash[:danger] = "Access denied."
+      redirect_to gossips_path
+    end 
+  
   end
 
 
