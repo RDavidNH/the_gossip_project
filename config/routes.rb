@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users
   resources :cities
   resources :sessions, only: [:new, :create, :destroy]
+  resources :likes
   
   #get '/gossip/:id', to: 'app#show', as: 'show'
   #get '/user/:id', to: 'app#show_user', as: 'show_user'
