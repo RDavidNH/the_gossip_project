@@ -9,6 +9,7 @@
       <table class="table table-sm">
         <thead>
           <tr>
+            <th>Likes</th>
             <th>Les potins</th>
             <th>Les auteurs</th>
             <th>-</th>  
@@ -17,6 +18,20 @@
         <tbody>
           <% @gossips.each do |g| %>
           <tr>
+            <td>
+              <%= g.likes.size %>
+              
+              <% if g.likes.size > 0 %>
+                <%= form_tag like_path(g.id), method: "delete" do %>
+                  <%= submit_tag "Je n'aime pas", :class => 'btn btn-primary btn-sm' %>
+                <% end %>
+              <% else %>
+                <%= form_tag likes_path, method: "post" do %>
+                  <input type="hidden" name="gossip_id" value="<%= g.id %>" />
+                  <%= submit_tag "J'aime", :class => 'btn btn-primary btn-sm' %>
+                <% end %>
+              <% end %>
+            </td>
             <td><%= link_to g.title, gossip_path(g.id) %></td>
             <td><%= link_to g.user.first_name, user_path(g.user.id) %></td>
             <td>
