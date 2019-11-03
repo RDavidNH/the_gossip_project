@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-
   def index
     @users = User.all
   end
@@ -17,14 +16,12 @@ class UsersController < ApplicationController
   def create
     c = City.find(1)
     
-    #p params
-    #return 
-    
     @new_user = User.new(
       first_name: params[:first_name], 
       last_name: params[:last_name], 
       description: params[:description],
       email: params[:email],
+      password: params[:password],
       age: params[:age],
       city: c
     )
