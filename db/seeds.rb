@@ -12,6 +12,22 @@ cities = []
 users = []
 tags = []
 
+# fixed admin user
+  city = City.create(
+    name: Faker::Address.city,
+    zip_code: Faker::Address.zip_code
+  )
+
+  user = User.create(
+    first_name: 'admin',
+    last_name: 'admin',
+    description: 'admin user',
+    email: 'admin@email.com',
+    password: 'adminadmin',
+    age: Faker::Number.within(range: 15..70),
+    city: city
+  )
+
 # create 10 users with 10 cities
 10.times do |i|
 
@@ -25,6 +41,7 @@ tags = []
     last_name: Faker::Name.last_name,
     description: Faker::Lorem.sentence(word_count: 12),
     email: Faker::Internet.email,
+    password: 'adminadmin',
     age: Faker::Number.within(range: 15..70),
     city: city
   )

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+    
+      <h1>Connectez vous!</h1>
+      
+      <%= form_tag url_for(action: 'create'), method: "post" do %>
+
+      <%= label_tag 'Email' %>
+      <%= text_field_tag 'email', '', :class => 'form-control' %>
+      <br /> 
+
+      <%= label_tag 'Mot de passe' %>
+      <%= password_field_tag 'password', '', :class => 'form-control' %>
+      <br /> 
+
+      <%= submit_tag "Créer" %>
+
+      <% end %>
+    
+    </div>
+  </div>
+</div>
